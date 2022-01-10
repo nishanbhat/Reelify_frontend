@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react'
-import { Typography, Button, Form, message, Input, Icon } from 'antd';
-// import Dropzone from 'react-dropzone';
-
+import { Typography, Button, Form, message, Input } from 'antd';
+import {PlusCircleOutlined } from '@ant-design/icons';
+import Dropzone from 'react-dropzone';
 const { Title } = Typography;
 const { TextArea } = Input;
 
@@ -56,7 +56,7 @@ function UploadVideoPage() {
 
         <Form >
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                {/* <Dropzone 
+                <Dropzone 
                     multiple={false}
                     maxSize={800000000}>
                     {({ getRootProps, getInputProps }) => (
@@ -64,7 +64,7 @@ function UploadVideoPage() {
                             {...getRootProps()}
                         >
                             <input {...getInputProps()} />
-                            <Icon type="plus" style={{ fontSize: '3rem' }} />
+                            <PlusCircleOutlined style={{ fontSize: '3rem' }} />
 
                         </div>
                     )}
@@ -74,8 +74,7 @@ function UploadVideoPage() {
                     <div>
                         <img src={`http://localhost:5000/${thumbnail}`} alt="haha" />
                     </div>
-                } */ 
-                }
+                }  */}
             </div>
 
             <br /><br />
@@ -115,4 +114,4 @@ function UploadVideoPage() {
     )
 }
 
-export default UploadVideoPage
+export default UploadVideoPage;
