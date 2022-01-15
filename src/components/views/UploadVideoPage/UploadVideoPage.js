@@ -2,51 +2,53 @@ import React, { useState, useEffect} from 'react'
 import { Typography, Button, Form, message, Input } from 'antd';
 import {PlusCircleOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
+
 const { Title } = Typography;
 const { TextArea } = Input;
 
-// const Private = [
-//     { value: 0, label:'Private'},
-//     { value: 1, label:'Public'}
-// ]
+const Private = [
+    { value: 0, label:'Private'},
+    { value: 1, label:'Public'}
+]
 
-// const Catogory = [
-//     { value: 0, label: "Film & Animation" },
-//     { value: 0, label: "Autos & Vehicles" },
-//     { value: 0, label: "Music" },
-//     { value: 0, label: "Pets & Animals" },
-//     { value: 0, label: "Sports" },
-// ]
+const Catogory = [
+    { value: 0, label: "Film & Animation" },
+    { value: 0, label: "Autos & Vehicles" },
+    { value: 0, label: "Music" },
+    { value: 0, label: "Pets & Animals" },
+    { value: 0, label: "Sports" },
+]
 
 function UploadVideoPage() {
 
-    // const [title, setTitle] = useState("");
-    // const [Description, setDescription] = useState("");
-    // const [privacy, setPrivacy] = useState(0)
-    // const [Categories, setCategories] = useState("Film & Animation")
+    const [title, setTitle] = useState("");
+    const [Description, setDescription] = useState("");
+    const [privacy, setPrivacy] = useState(0)
+    const [Categories, setCategories] = useState("Film & Animation")
 
 
-    // const handleChangeTitle = ( event ) => {
-    //     setTitle(event.currentTarget.value)
-    // }
+    const handleChangeTitle = ( event ) => {
+        console.log(event.currentTarget.value)
+        setTitle(event.currentTarget.value)
+    }
 
-    // const handleChangeDecsription = (event) => {
-    //     console.log(event.currentTarget.value)
+    const handleChangeDecsription = (event) => {
+        console.log(event.currentTarget.value)
 
-    //     setDescription(event.currentTarget.value)
-    // }
+        setDescription(event.currentTarget.value)
+    }
 
-    // const handleChangeOne = (event) => {
-    //     setPrivacy(event.currentTarget.value)
-    // }
+    const handleChangeOne = (event) => {
+        setPrivacy(event.currentTarget.value)
+    }
 
-    // const handleChangeTwo = (event) => {
-    //     setCategories(event.currentTarget.value)
-    // }
+    const handleChangeTwo = (event) => {
+        setCategories(event.currentTarget.value)
+    }
 
-    // const onSubmit = () => {
+    const onSubmit = () => {
         
-    // }
+    }
 
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
@@ -54,7 +56,7 @@ function UploadVideoPage() {
             <Title level={2} > Upload Video</Title>
         </div>
 
-        <Form >
+        <Form onSubmit={onSubmit} >
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Dropzone 
                     multiple={false}
@@ -80,34 +82,34 @@ function UploadVideoPage() {
             <br /><br />
             <label>Title</label>
             <Input
-                //  onChange={handleChangeTitle}
-                //  value={title}
+                 onChange={handleChangeTitle}
+                 value={title}
             />
             <br /><br />
             <label>Description</label>
             <TextArea
-                //  onChange={handleChangeDecsription}
-                //  value={Description}
+                 onChange={handleChangeDecsription}
+                 value={Description}
             />
             <br /><br />
 
-            {/* <select onChange={handleChangeOne}>
+            <select >
                 {Private.map((item, index) => (
                     <option key={index} value={item.value}>{item.label}</option>
                 ))}
-            </select> */}
+            </select>
             <br /><br />
 
-            {/* <select onChange={handleChangeTwo}>
+            <select >
                 {Catogory.map((item, index) => (
                     <option key={index} value={item.label}>{item.label}</option>
                 ))}
-            </select> */}
+            </select>
             <br /><br />
 
-            {/* <Button type="primary" size="large" onClick={onSubmit}>
+            <Button type="primary" size="large" onClick={onSubmit}>
                 Submit
-            </Button> */}
+            </Button>
 
         </Form>
     </div>
