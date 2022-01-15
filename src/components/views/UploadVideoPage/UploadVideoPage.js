@@ -2,6 +2,7 @@ import React, { useState, useEffect} from 'react'
 import { Typography, Button, Form, message, Input } from 'antd';
 import {PlusCircleOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
+import axios from 'axios';
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -25,6 +26,8 @@ function UploadVideoPage() {
     const [Description, setDescription] = useState("");
     const [privacy, setPrivacy] = useState(0)
     const [Categories, setCategories] = useState("Film & Animation")
+    const [FilePath, setFilePath] = useState("")
+ 
 
 
     const handleChangeTitle = ( event ) => {
@@ -50,6 +53,34 @@ function UploadVideoPage() {
         
     }
 
+    const onDrop = (files) => {
+        let formData = new FormData();
+        const config = {
+            header: {'content-type': 'multipart/form-data'}
+        }
+
+        console.log(files)
+        formData.append('file',files[0])
+
+        axios.post('/api/video/uploadfiles', formData, config)
+        .then(response=> {
+            if(response.data.success){
+                console.log(response)
+
+                let variable = {
+                    filePath: response.data.filePath,
+                    fileName: response.data.fileName
+                }
+                setFilePath(response.data.filePath)
+
+                //gerenate thumbnail with this filepath ! 
+                
+            } else {
+                alert('failed to save the video in server')
+            }
+        })
+    }
+
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -59,6 +90,7 @@ function UploadVideoPage() {
         <Form onSubmit={onSubmit} >
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                 <Dropzone 
+                    onDrop={onDrop}
                     multiple={false}
                     maxSize={800000000}>
                     {({ getRootProps, getInputProps }) => (
