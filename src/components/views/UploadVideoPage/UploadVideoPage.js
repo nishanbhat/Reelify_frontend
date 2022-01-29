@@ -3,6 +3,7 @@ import { Typography, Button, Form, message, Input } from 'antd';
 import {PlusCircleOutlined } from '@ant-design/icons';
 import Dropzone from 'react-dropzone';
 import axios from 'axios';
+import { useSelector } from "react-redux";
 
 const { Title } = Typography;
 const { TextArea } = Input;
@@ -20,7 +21,9 @@ const Catogory = [
     { value: 0, label: "Sports" },
 ]
 
-function UploadVideoPage() {
+function UploadVideoPage(props
+) {
+    const user =useSelector(state => state.user);
 
     const [title, setTitle] = useState("");
     const [Description, setDescription] = useState("");
@@ -54,6 +57,40 @@ function UploadVideoPage() {
     }
 
     const onSubmit = () => {
+
+        
+        event.preventDefault();
+
+        if (user.userData && !user.userData.isAuth) {
+            return alert('Please Log in First')
+        }
+
+        if (title === "" || Description === "" ||
+            Categories === "" || FilePath === "" ||
+            Duration === "" || Thumbnail === "") {
+            return alert('Please first fill all the fields')
+        }
+
+        const variables = {
+            writer: user.userData._id,
+            title: title,
+            description: Description,
+            privacy: privacy,
+            filePath: FilePath,
+            category: Categories,
+            duration: Duration,
+            thumbnail: Thumbnail
+        }
+
+        axios.post('/api/video/uploadVideo', variables)
+            .then(response => {
+                if (response.data.success) {
+                    alert('video Uploaded Successfully')
+                    props.history.push('/')
+                } else {
+                    alert('Failed to upload video')
+                }
+            })
         
     }
 
