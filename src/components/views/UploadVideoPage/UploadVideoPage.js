@@ -56,7 +56,7 @@ function UploadVideoPage(props
         setCategories(event.currentTarget.value)
     }
 
-    const onSubmit = () => {
+    const onSubmit = (event) => {
 
         
         event.preventDefault();
