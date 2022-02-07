@@ -1,13 +1,46 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-
 function Subscriber(props) {
-    
     const userTo = props.userTo
     const userFrom = props.userFrom
 
-    const [subscribeNumber, setSubscriberNumber] = useState(0)
+    const [SubscribeNumber, setSubscribeNumber] = useState(0)
     const [Subscribed, setSubscribed] = useState(false)
+
+    const onSubscribe = ( ) => {
+
+        let subscribeVariables = {
+                userTo : userTo,
+                userFrom : userFrom
+        }
+
+        if(Subscribed) {
+            //when we are already subscribed 
+            axios.post('/api/subscribe/unSubscribe', subscribeVariables)
+                .then(response => {
+                    if(response.data.success){ 
+                        setSubscribeNumber(SubscribeNumber - 1)
+                        setSubscribed(!Subscribed)
+                    } else {
+                        alert('Failed to unsubscribe')
+                    }
+                })
+
+        } else {
+            // when we are not subscribed yet
+            
+            axios.post('/api/subscribe/subscribe', subscribeVariables)
+                .then(response => {
+                    if(response.data.success) {
+                        setSubscribeNumber(SubscribeNumber + 1)
+                        setSubscribed(!Subscribed)
+                    } else {
+                        alert('Failed to subscribe')
+                    }
+                })
+        }
+
+    }
 
 
     useEffect(() => {
@@ -16,13 +49,13 @@ function Subscriber(props) {
         axios.post('/api/subscribe/subscribeNumber', subscribeNumberVariables)
             .then(response => {
                 if (response.data.success) {
-                    setSubscriberNumber(response.data.subscribeNumber)
+                    setSubscribeNumber(response.data.subscribeNumber)
                 } else {
                     alert('Failed to get subscriber Number')
                 }
             })
 
-            axios.post('/api/subscribe/subscribed', subscribeNumberVariables)
+        axios.post('/api/subscribe/subscribed', subscribeNumberVariables)
             .then(response => {
                 if (response.data.success) {
                     setSubscribed(response.data.subcribed)
@@ -31,16 +64,19 @@ function Subscriber(props) {
                 }
             })
 
-        },[])
+    }, [])
+
+
     return (
         <div>
-            <button style={{
-                backgroundColor: `${Subscribed ? '#AAAAA' : 'Black'}`,
+            <button 
+            onClick={onSubscribe}
+            style={{
+                backgroundColor: `${Subscribed ? '#AAAAAA' : 'black'}`,
                 borderRadius: '4px', color: 'white',
                 padding: '10px 16px', fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase'
             }}>
-                {subscribeNumber} {Subscribed ? 'Subscribed' :
-                    'Subscribe'}
+                {SubscribeNumber} {Subscribed ? 'Subscribed' : 'Subscribe'}
             </button>
         </div>
     )
