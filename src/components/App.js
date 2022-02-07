@@ -1,7 +1,9 @@
 import React, { Suspense } from 'react';
 import { Route, Switch } from "react-router-dom";
 import Auth from "../hoc/auth";
+
 // pages routing
+
 import LandingPage from "./views/LandingPage/LandingPage.js";
 import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
@@ -9,6 +11,8 @@ import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
 import UploadVideoPage from './views/UploadVideoPage/UploadVideoPage';
 import DetailVideoPage from './views/DetailVideoPage/DetailVideoPage';
+import SubscriptionPage from './views/SubscriptionPage.js/SubscriptionPage';
+
 //null   Anyone Can go inside
 //true   only logged in user can go inside
 //false  logged in user can't go inside
@@ -24,6 +28,8 @@ function App() {
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/video/upload" component={Auth(UploadVideoPage, true)} />
           <Route exact path="/video/:videoId" component={Auth(DetailVideoPage, true)} />
+          <Route exact path="/video/:videoId" component={Auth(SubscriptionPage, null)} />
+
 
         </Switch>
       </div>
