@@ -25,7 +25,24 @@ function DetailVideoPage(props) {
                     alert('Failed to get video Info')
                 }
             })
+
+            axios.post('/api/comment/getComments', videoVariable)
+            .then(response => {
+                if (response.data.success) {
+                    console.log('response.data.comments',response.data.comments)
+                    setCommentLists(response.data.comments)
+                } else {
+                    alert('Failed to get video Info')
+                }
+            })
+
     }, [])
+
+    const updateComment = (newComment) => {
+        setCommentLists(CommentLists.concat(newComment))
+    }
+
+    
 
 
     if(Video.writer) {
