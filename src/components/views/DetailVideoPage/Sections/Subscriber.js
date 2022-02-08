@@ -8,7 +8,6 @@ function Subscriber(props) {
     const [Subscribed, setSubscribed] = useState(false)
 
     const onSubscribe = ( ) => {
-
         let subscribeVariables = {
                 userTo : userTo,
                 userFrom : userFrom
@@ -28,7 +27,6 @@ function Subscriber(props) {
 
         } else {
             // when we are not subscribed yet
-            
             axios.post('/api/subscribe/subscribe', subscribeVariables)
                 .then(response => {
                     if(response.data.success) {
@@ -39,9 +37,7 @@ function Subscriber(props) {
                     }
                 })
         }
-
     }
-
 
     useEffect(() => {
 
@@ -65,7 +61,6 @@ function Subscriber(props) {
             })
 
     }, [])
-
 
     return (
         <div>
