@@ -1,6 +1,8 @@
 import React from 'react'
-import { SmileOutlined } from '@ant-design/icons';
-import { FaRegSurprise, FaSurprise } from 'react-icons/fa';
+
+import Icon from '@ant-design/icons';
+
+
 function Footer() {
     return (
         <div style={{
@@ -8,7 +10,7 @@ function Footer() {
             flexDirection: 'column', alignItems: 'center',
             justifyContent: 'center', fontSize:'1rem'
         }}>
-           <p> OMG Nishan's coding Wild !!!  <FaRegSurprise/></p>
+           <p> Reelify  <Icon type="smile" /></p>
         </div>
     )
 }
