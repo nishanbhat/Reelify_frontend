@@ -15,5 +15,4 @@ function LeftMenu(props) {
   </Menu>
   )
 }
-
 export default LeftMenu
